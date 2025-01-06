@@ -11,7 +11,6 @@ def get_openai_response(user_message, chat_history):
     user_message  -- the latest user message (string)
     chat_history  -- a list of (user_text, bot_text) pairs for the conversation
     """
-
     # System prompt with a fish-themed style
     system_prompt = {
         "role": "system",
@@ -33,13 +32,14 @@ def get_openai_response(user_message, chat_history):
     # Append the new user message
     messages.append({"role": "user", "content": user_message})
 
-    # Create a ChatCompletion request using GPT-4
-    response = openai.ChatCompletion.create(
-        model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+    # Create a ChatCompletion request using the new API syntax
+    client = openai.OpenAI()
+    response = client.chat.completions.create(
+        model=os.getenv("OPENAI_MODEL", "gpt-4"),
         messages=messages
     )
 
-    bot_reply = response["choices"][0]["message"]["content"]
+    bot_reply = response.choices[0].message.content
     return bot_reply
 
 # Update the chat and handle new messages
