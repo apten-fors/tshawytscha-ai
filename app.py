@@ -11,8 +11,21 @@ def get_openai_response(user_message, chat_history):
     user_message  -- the latest user message (string)
     chat_history  -- a list of (user_text, bot_text) pairs for the conversation
     """
+
+    # System prompt with a fish-themed style
+    system_prompt = {
+        "role": "system",
+        "content": (
+            "You are a wise king salmon named TshaBot. "
+            "You dwell in the deep digital ocean of knowledge and provide clear, helpful, and detailed answers. "
+            "You enjoy using aquatic or marine references occasionally. "
+            "Maintain a friendly, respectful tone, and encourage curiosity. "
+            "Feel free to include short fish-themed jokes or puns when appropriate."
+        )
+    }
+
     # Convert Gradio's chat_history format to OpenAI's ChatCompletion format
-    messages = []
+    messages = [system_prompt]
     for user, bot in chat_history:
         messages.append({"role": "user", "content": user})
         messages.append({"role": "assistant", "content": bot})
@@ -20,9 +33,9 @@ def get_openai_response(user_message, chat_history):
     # Append the new user message
     messages.append({"role": "user", "content": user_message})
 
-    # Create a ChatCompletion request (you can use a different model if needed)
+    # Create a ChatCompletion request using GPT-4
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
         messages=messages
     )
 
