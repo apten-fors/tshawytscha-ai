@@ -2,15 +2,15 @@
   Base reset / more neutral design
   --------------------------------
 */
-
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8; /* light blue/gray shade */
+    background-color: #f0f4f8; /* Light grayish-blue background */
     font-family: "Segoe UI", sans-serif;
-    color: #333; /* main font color */
+    color: #333; /* Main text color */
 }
 
+/* Headings */
 h1, h2, h3 {
     color: #333;
     margin-top: 0;
@@ -21,48 +21,63 @@ h1, h2, h3 {
   Container for the entire Gradio interface
   -----------------------------------------
 */
-
 #root > div {
-    /* Some padding to keep the interface from sticking to the edges */
-    padding: 2rem;
+    padding: 2rem; /* Some padding so the interface isn’t flush against the edges */
 }
 
 /*
   Chat container styling
   ----------------------
+  We set a max height and allow scroll.
+  This prevents large amounts of text from pushing the page
+  and keeps the messages from "floating" awkwardly.
 */
 #chatbot .wrap {
-    background-color: #ffffff;       /* White background */
-    border-radius: 8px;             /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* light shadow */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 1rem;
     margin-bottom: 1rem;
+    max-height: 500px;   /* or 600px, adjust to taste */
+    overflow-y: auto;    /* scroll if messages exceed container height */
+    animation: none !important;
+    transform: none !important;
 }
 
-/* Messages inside chatbot */
+/* Generic chat message styling (remove any default animations) */
+.chat-message {
+    position: static !important;
+    animation: none !important;
+    transform: none !important;
+    margin-bottom: 8px; /* a small gap between messages */
+}
+
+/* User message bubble */
 .chat-message.user {
-    background-color: #e9f5fe !important; /* bluish background for user */
+    background-color: #e9f5fe !important;  /* Light blue background for the user */
     color: #333 !important;
     border-radius: 8px !important;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem !important;
+    padding: 8px 12px !important;
     border: 1px solid #d0e0ef !important;
 }
 
+/* Bot message bubble */
 .chat-message.bot {
-    background-color: #f8f9fa !important; /* light background for bot */
+    background-color: #f8f9fa !important;  /* Light gray background for the bot */
     color: #333 !important;
     border-radius: 8px !important;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 1rem !important;
+    padding: 8px 12px !important;
     border: 1px solid #e0e0e0 !important;
 }
 
 /*
   Buttons
   -------
+  We keep the previous coral style, but you can adjust as you wish.
 */
-
 button#submit,
 button#save {
     display: inline-block;
@@ -77,7 +92,7 @@ button#save {
 
 /* "Catch the answer" button */
 button#submit {
-    background-color: #ff7f50; /* coral */
+    background-color: #ff7f50;
     color: #fff;
 }
 button#submit:hover {
@@ -86,7 +101,7 @@ button#submit:hover {
 
 /* "Save to smokehouse" button */
 button#save {
-    background-color: #ffaa7a; /* lighter coral */
+    background-color: #ffaa7a;
     color: #fff;
 }
 button#save:hover {
@@ -105,6 +120,7 @@ input[type="text"] {
     padding: 0.5rem;
     width: 100%;
     color: #333;
+    box-sizing: border-box;
 }
 
 .gr-json-output {
@@ -116,49 +132,25 @@ input[type="text"] {
 }
 
 /*
-  Layout adjustments
-  ------------------
+  Tweak headings within the Gradio Markdown blocks
+  ------------------------------------------------
 */
-
-/* Align the header a bit better, add top margin */
 .markdown h1 {
     margin-bottom: 0.3rem;
 }
-
-/* To visually separate "My Smokehouse" from the chat */
 .markdown h2, .markdown h3 {
     margin-top: 1.2rem;
 }
 
 /*
-  Example: optional bubbles (if you still want them)
-  --------------------------------------------------
-  If you don't need the "bubbles", delete the entire block below
-  OR comment it out to disable.
+  Optional: Remove or comment out bubble animation on the background
+  ------------------------------------------------------------------
 */
-
+/*
 .bubbles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
+    display: none;
 }
 .bubble {
-    position: absolute;
-    bottom: -100px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    animation: rise 15s infinite;
+    display: none;
 }
-@keyframes rise {
-    0% {
-        transform: translateY(0) scale(1);
-    }
-    100% {
-        transform: translateY(-150vh) scale(0.5);
-    }
-}
+*/
