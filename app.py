@@ -69,14 +69,18 @@ def main():
 
     # Build the Gradio interface
     with gr.Blocks(css=custom_css, title="Tshawytscha AI") as demo:
-        # Updated HTML with corrected image path
-        image_base64 = get_image_base64("images/fish.png")
+        # Get base64 for both images
+        fish_base64 = get_image_base64("images/fish.png")
+        logo_base64 = get_image_base64("images/logo.png")
+
         gr.HTML(
             f"""
             <div style="text-align: center; margin-bottom: 0.5rem;">
-                <h1 style="color: #6c4fbb; margin-bottom: 1rem;">TSHAWYTSCHA AI</h1>
+                <div style="margin-bottom: 1rem;">
+                    <img src="data:image/png;base64,{logo_base64}" alt="Logo" class="logo"/>
+                </div>
                 <div style="display: flex; justify-content: center;">
-                    <img src="data:image/png;base64,{image_base64}" alt="Fish" class="salmon"/>
+                    <img src="data:image/png;base64,{fish_base64}" alt="Fish" class="salmon"/>
                 </div>
             </div>
             """

@@ -142,3 +142,12 @@ input[type="text"] {
     color: #333 !important;
     -webkit-text-fill-color: #333 !important;
 }
+
+/* Logo styling */
+img.logo {
+    max-width: 800px;
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* Center */
+}
