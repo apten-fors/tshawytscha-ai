@@ -73,3 +73,25 @@ input[type="text"] {
     border-radius: 4px !important;
     padding: 0.5rem !important;
 }
+
+/* Submit button styling */
+.gradio-container button {
+    background-color: #4CAF50 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    cursor: pointer !important;
+}
+
+.gradio-container button:hover {
+    background-color: #45a049 !important;
+}
+
+/* Header styling */
+h1 {
+    font-size: 2.5rem !important;  /* Increase font size */
+    margin: 2rem 0 !important;   /* Increase top and bottom margins */
+    color: #6c4fbb !important;   /* Keep the purple color */
+    font-weight: bold !important; /* Make the font bold */
+}

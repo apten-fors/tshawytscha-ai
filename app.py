@@ -36,7 +36,7 @@ def get_openai_response(user_message, chat_history):
     # Create a ChatCompletion request using the new API syntax
     client = openai.OpenAI()
     response = client.chat.completions.create(
-        model=os.getenv("OPENAI_MODEL", "gpt-4"),
+        model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
         messages=messages
     )
 
