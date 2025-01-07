@@ -7,7 +7,8 @@ body {
 
 /* Main container: center and limit width */
 #root > div {
-    max-width: 600px;
+    width: 33%;
+    min-width: 300px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }

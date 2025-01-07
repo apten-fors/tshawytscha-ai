@@ -57,9 +57,9 @@ def main():
         # Header with uppercase title and fish image
         gr.HTML(
             """
-            <div style="text-align: center; margin-bottom: 20px;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
                 <h1 style="color: #6c4fbb; margin-bottom: 1rem;">TSHAWYTSCHA AI</h1>
-                <img src="fish.png" alt="Fish" style="max-width: 200px;">
+                <img src="file=fish.png" alt="Fish" style="max-width: 200px;"/>
             </div>
             """
         )
