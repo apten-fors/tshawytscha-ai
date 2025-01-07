@@ -114,3 +114,11 @@ img.salmon {
     max-width: 150px;
   }
 }
+
+button[disabled],
+button:disabled {
+    opacity: 1 !important;
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+    pointer-events: none !important; /* Keep the button non-clickable if needed */
+}
