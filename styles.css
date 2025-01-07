@@ -1,21 +1,42 @@
-body {
+/* Reset background color everywhere */
+:root {
+    --body-background-fill: #362d2d !important;
+}
+
+body,
+gradio-app,
+#gradio-app {
+    background-color: #362d2d !important;
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8;
-    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+}
+
+/* Target the Svelte app container */
+.gradio-app > div {
+    background-color: #362d2d !important;
+}
+
+/* Keep chat messages and input areas white */
+#conversation .wrap,
+textarea,
+input[type="text"] {
+    background-color: #ffffff !important;
 }
 
 /* Main container: center and limit width */
-#root > div {
-    width: 33%;
-    min-width: 300px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+.root > div,
+.gradio-container {
+    max-width: 800px !important;
+    width: 33% !important;
+    min-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1rem !important;
+    background: #362d2d !important;
 }
 
 /* Chat area styling */
 #conversation .wrap {
-    background-color: #ffffff;
     border-radius: 6px;
     min-height: 300px;
     overflow-y: auto;
@@ -54,7 +75,7 @@ input[type="text"] {
 
 /* Button styling */
 button {
-    background-color: #ff7f50;
+    background-color: #4CAF50 !important;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -63,8 +84,34 @@ button {
     font-weight: 600;
     font-size: 0.95rem;
     transition: background-color 0.3s ease;
-    margin-top: 0.5rem; /* space between input and button */
+    margin-top: 0.5rem;
 }
 button:hover {
-    background-color: #ff9b68;
+    background-color: #45a049 !important;
+}
+
+.plain-image {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+.plain-image > div {
+    background: none !important;
+    border: none !important;
+}
+
+.plain-image img {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Header styling */
+h1 {
+    font-size: 3rem !important;
+    margin: 2rem 0 !important;
+    color: #1d54de !important;
+    font-weight: bold !important;
 }

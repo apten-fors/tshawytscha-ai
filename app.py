@@ -1,6 +1,7 @@
 import os
 import openai
 import gradio as gr
+import base64
 
 # Set your OpenAI API key here
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -47,19 +48,30 @@ def chatbot_interaction(user_message, chat_history):
     chat_history.append((user_message, bot_reply))
     return chat_history
 
+def get_image_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+    return encoded_string
+
 def main():
     # Load custom CSS
     with open("styles.css", "r", encoding="utf-8") as css_file:
         custom_css = css_file.read()
 
+    # Create the images directory if it doesn't exist
+    os.makedirs("images", exist_ok=True)
+
     # Build the Gradio interface
     with gr.Blocks(css=custom_css, title="Tshawytscha AI") as demo:
-        # Header with uppercase title and fish image
+        # Updated HTML with corrected image path
+        image_base64 = get_image_base64("images/fish.png")
         gr.HTML(
-            """
+            f"""
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <h1 style="color: #6c4fbb; margin-bottom: 1rem;">TSHAWYTSCHA AI</h1>
-                <img src="file=fish.png" alt="Fish" style="max-width: 200px;"/>
+                <div style="display: flex; justify-content: center;">
+                    <img src="data:image/png;base64,{image_base64}" alt="Fish" style="height: 200px; object-fit: contain; background: none;"/>
+                </div>
             </div>
             """
         )
@@ -107,7 +119,12 @@ def main():
             outputs=user_input
         )
 
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=7860,
+        allowed_paths=["images"],
+        show_api=False,
+    )
 
 if __name__ == "__main__":
     main()
