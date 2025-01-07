@@ -48,43 +48,54 @@ def chatbot_interaction(user_message, chat_history):
     return chat_history
 
 def main():
-    # Read custom CSS
-    with open("styles.css", "r", encoding="utf-8") as f:
-        custom_css = f.read()
+    # Load custom CSS
+    with open("styles.css", "r", encoding="utf-8") as css_file:
+        custom_css = css_file.read()
 
+    # Build the Gradio interface
     with gr.Blocks(css=custom_css, title="Tshawytscha AI") as demo:
-        # Header (centered)
-        with gr.Row(elem_id="header-row"):
-            gr.Markdown(
-                """
-                <div class="site-title">
-                    <h1>Tshawytscha AI</h1>
-                </div>
-                """,
-                elem_id="site-title-md"
-            )
+        # Header with uppercase title and fish image
+        gr.HTML(
+            """
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h1 style="color: #6c4fbb; margin-bottom: 1rem;">TSHAWYTSCHA AI</h1>
+                <img src="fish.png" alt="Fish" style="max-width: 200px;">
+            </div>
+            """
+        )
 
-        # Fish image (optional)
-        with gr.Row(elem_id="fish-row"):
-            # If you have a file fish.png
-            fish_image = gr.Image(value="fish.png", elem_id="fish-img", show_label=False)
-
-        # Main chat block
+        # State for the conversation
         chat_state = gr.State([])
-        with gr.Row(elem_id="chat-row"):
-            chatbot = gr.Chatbot(label="Conversation", elem_id="chatbot-area")
 
-        # Input field + button
-        with gr.Row(elem_id="input-row"):
+        # The chatbot itself (no label, fixed height)
+        chatbot = gr.Chatbot(
+            elem_id="conversation",
+            show_label=False,
+            height=300
+        )
+
+        # Input and button in a column (button below)
+        with gr.Column():
             user_input = gr.Textbox(
                 placeholder="Ask something...",
-                label="Your question",
-                lines=1,
-                elem_id="user-input"
+                label="",
+                lines=1
             )
-            submit_btn = gr.Button("Catch the answer", elem_id="submit-btn")
+            submit_btn = gr.Button("Catch the answer")
 
-        # Button logic
+        # Send message by pressing Enter
+        user_input.submit(
+            fn=chatbot_interaction,
+            inputs=[user_input, chat_state],
+            outputs=chatbot
+        )
+        user_input.submit(
+            fn=lambda: "",
+            inputs=None,
+            outputs=user_input
+        )
+
+        # Send message by button click
         submit_btn.click(
             fn=chatbot_interaction,
             inputs=[user_input, chat_state],
