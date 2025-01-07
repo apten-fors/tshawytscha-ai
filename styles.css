@@ -122,3 +122,23 @@ button:disabled {
     -webkit-text-fill-color: #333 !important;
     pointer-events: none !important; /* Keep the button non-clickable if needed */
 }
+
+/* Message text color and contrast fixes */
+#conversation,
+.message-wrap,
+.message {
+    color: #333 !important;
+}
+
+button[data-testid="user"],
+button[data-testid="bot"] {
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+}
+
+/* Ensure input text is visible */
+textarea,
+input[type="text"] {
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+}
