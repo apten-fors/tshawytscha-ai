@@ -6,11 +6,11 @@
 /* Main container: center and limit width */
 .root > div,
 .gradio-container {
-    max-width: 800px !important;
-    width: 33% !important;
+    max-width: 600px !important;
+    width: 90% !important;
     min-width: 400px !important;
     margin: 0 auto !important;
-    padding: 2rem 1rem !important;
+    padding: 1rem 1rem !important;
     background: #362d2d !important;
 }
 
@@ -91,7 +91,26 @@ input[type="text"] {
 /* Header styling */
 h1 {
     font-size: 2.5rem !important;  /* Increase font size */
-    margin: 2rem 0 !important;   /* Increase top and bottom margins */
+    margin: 0.5rem 0 !important;   /* Increase top and bottom margins */
     color: #6c4fbb !important;   /* Keep the purple color */
     font-weight: bold !important; /* Make the font bold */
+}
+
+/* Adaptive image */
+img.salmon {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;  /* Center */
+}
+
+/* On narrow screens (up to 400-500px) you can reduce the size even more */
+@media (max-width: 500px) {
+  #root > div,
+  .gradio-container {
+    padding: 1rem;  /* Reduce padding */
+  }
+  img.salmon {
+    max-width: 150px;
+  }
 }
